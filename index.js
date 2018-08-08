@@ -53,3 +53,12 @@ s2.S2Point.prototype.toArray = function() {
 s2.S2Point.prototype.toString = function() {
   return this.toArray().toString();
 };
+
+s2.id2LatLng = function (id) {
+  return new s2.S2CellId(id.toString()).toLatLng();
+};
+
+s2.latLng2Id = function (lat, lng, level) {
+  level = level || 30;
+  return new s2.S2CellId(new s2.S2LatLng(lat, lng)).parent(level).id();
+};

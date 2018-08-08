@@ -58,7 +58,11 @@ for(var i = 0; i < results.length; i++)
 }
 
 console.log("getNeighbors with cellid");
-var cid1 = new s2.S2CellId(new s2.S2LatLng(40.039801,116.332296)).parent(17);
+var latLng1 = new s2.S2LatLng(40.039801,116.332296);
+var cid1 = new s2.S2CellId(latLng1).parent(17);
+var cid2 = new s2.S2CellId(latLng1).parent(30);
+var id = cid1.id();
+console.log('id:', id);
 // var neighbors = cid1.getAllNeighbors(20);
 var neighbors = cid1.getEdgeNeighbors();
 // var neighbors = cid1.getVertexNeighbors(20);
@@ -67,9 +71,18 @@ for(var i = 0; i < neighbors.length; i++) {
   console.log(neighbors[i].id())
 }
 
-var latLng1 = new s2.S2LatLng(40.039801,116.332296);
+
 console.log('toGeoJSON:',latLng1.toGeoJSON());
 console.log('lng,lat:',latLng1.lng, latLng1.lat);
 console.log('lngRadians,latRadians:',latLng1.lngRadians, latLng1.latRadians);
 console.log('toString:',latLng1.toString());
 console.log('toArray:',latLng1.toArray());
+
+var s2cid = new s2.S2CellId(id.toString());
+console.log('s2cid.id:', s2cid.id(), s2cid.level());
+console.log('s2cid.toLatLng:', s2cid.toLatLng().toArray());
+
+console.log('s2.id2LngLat:', s2.id2LatLng(cid2));
+console.log('s2.latLng2Id-17:', s2.latLng2Id(latLng1.lat, latLng1.lng, 17));
+console.log('s2.latLng2Id-30:', s2.latLng2Id(latLng1.lat, latLng1.lng, 30));
+console.log('s2.latLng2Id-def:', s2.latLng2Id(latLng1.lat, latLng1.lng));
