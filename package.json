@@ -15,17 +15,17 @@
     "mocha": "^2.2.5",
     "node-gyp": "^3.4.0"
   },
-  "author": "Vito <wangye@xiaomi.com>",
+  "author": "Vito <vito2015@live.com>",
   "repository": {
     "type": "git",
-    "url": "git://git@v9.git.n.xiaomi.com:mi-lbs/common/s2geo-node.git"
+    "url": "https://github.com/Vito2015/s2geo-node.git"
   },
   "gypfile": true,
   "description": "Bindings for the [S2 Geometry Library](https://code.google.com/p/s2-geometry-library/) into [node.js](http://nodejs.org/).",
   "bugs": {
-    "url": "http://v9.git.n.xiaomi.com/mi-lbs/common/s2geo-node/issues"
+    "url": "https://github.com/Vito2015/s2geo-node/issues"
   },
-  "homepage": "http://v9.git.n.xiaomi.com/mi-lbs/common/s2geo-node#readme",
+  "homepage": "https://github.com/Vito2015/s2geo-node#readme",
   "directories": {
     "test": "test"
   },
