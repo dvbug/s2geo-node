@@ -80,16 +80,16 @@ longitude, stored internally as [radians](http://en.wikipedia.org/wiki/Radian)
 rather than degrees..
 
 ## latLng.lat -> number
-get latitude degrees
+get latitude degrees.
 
 ## latLng.lng -> number
-get longitude degrees
+get longitude degrees.
 
 ## latLng.latRadians -> number
-get latitude radians
+get latitude radians.
 
 ## latLng.lngRadians -> number
-get longitude radians
+get longitude radians.
 
 ## latLng.isValid() -> boolean
 
@@ -108,7 +108,10 @@ the range [-180, 180].
 
 ## latLng.toGeoJSON() -> GeoJSON object
 
-Return a Point geometry of this latlng object
+Return a Point geometry of this latlng object.
+
+## latLng.toArray() -> array
+Returns an `[longitude, latitude]` array serialization of this latlng object.
 
 # s2.Cell(ll:s2.S2LatLng)
 
@@ -118,7 +121,7 @@ also a more expensive representation (currently 48 bytes rather than 8).
 
 ## cell.toGeoJSON() -> GeoJSON object
 
-Return a Polygon geometry of this cell object
+Return a Polygon geometry of this cell object.
 
 ## cell.approxArea() -> number
 
