@@ -68,28 +68,30 @@ void LatLngRect::New(const FunctionCallbackInfo<Value>& args) {
     Local<Object> ll = args[0]->ToObject();
     Local<FunctionTemplate> latlng = Local<FunctionTemplate>::New(isolate,LatLng::constructor);
     if (latlng->HasInstance(ll)) {
-           isolate->ThrowException(Exception::TypeError(
-                String::NewFromUtf8(isolate,"(latlng) required")));
-                return;
+       if (args.Length() == 1) {
+               obj->this_ = S2LatLngRect(
+                   S2LatLngRect::FromPoint(node::ObjectWrap::Unwrap<LatLng>(ll)->get()));
+           } else if (args.Length() == 2) {
+               Local<Object> llb = args[1]->ToObject();
+
+               if (latlng->HasInstance(llb)) {
+                    obj->this_ = S2LatLngRect(
+                               S2LatLngRect::FromPointPair(
+                                   node::ObjectWrap::Unwrap<LatLng>(ll)->get(),
+                                   node::ObjectWrap::Unwrap<LatLng>(llb)->get()));
+               } else {
+                   isolate->ThrowException(Exception::TypeError(
+                                          String::NewFromUtf8(isolate,"(latlng) required")));
+                                          return;
+               }
+           }
+    } else {
+        isolate->ThrowException(Exception::TypeError(
+                        String::NewFromUtf8(isolate,"(latlng) required")));
+                        return;
     }
 
-    if (args.Length() == 1) {
-        obj->this_ = S2LatLngRect(
-            S2LatLngRect::FromPoint(node::ObjectWrap::Unwrap<LatLng>(ll)->get()));
-    } else if (args.Length() == 2) {
-        Local<Object> llb = args[1]->ToObject();
-        
-        if (latlng->HasInstance(llb)) {
-             isolate->ThrowException(Exception::TypeError(
-                String::NewFromUtf8(isolate,"(latlng) required")));
-                return;
-        }
 
-        obj->this_ = S2LatLngRect(
-            S2LatLngRect::FromPointPair(
-                node::ObjectWrap::Unwrap<LatLng>(ll)->get(),
-                node::ObjectWrap::Unwrap<LatLng>(llb)->get()));
-    }
 
     args.GetReturnValue().Set(args.This());
 }

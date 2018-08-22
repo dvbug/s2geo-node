@@ -24,7 +24,7 @@ var new_york = {lat: 40.7128, long: 74.0059}
 var latLngLA = new s2.S2LatLng(los_angeles.lat, los_angeles.long);
 var latLngNY = new s2.S2LatLng(new_york.lat, new_york.long);
 
-var latLngRect = new s2.S2LatLngRect(latLngLA.toPoint(), latLngNY.toPoint());
+var latLngRect = new s2.S2LatLngRect(latLngLA, latLngNY);
 
 var region = new s2.S2RegionCoverer();
 var minLevel = 5;
@@ -59,6 +59,9 @@ for(var i = 0; i < results.length; i++)
 
 console.log("getNeighbors with cellid");
 var latLng1 = new s2.S2LatLng(40.039801,116.332296);
+var latLng2 = new s2.S2LatLng(40.037801,116.332296);
+var latLng3 = new s2.S2LatLng(40.039801,116.332096);
+var latLng4 = new s2.S2LatLng(40.037801,116.332096);
 var cid1 = new s2.S2CellId(latLng1).parent(17);
 var cid2 = new s2.S2CellId(latLng1).parent(30);
 var id = cid1.id();
@@ -86,3 +89,7 @@ console.log('s2.id2LngLat:', s2.id2LatLng(cid2));
 console.log('s2.latLng2Id-17:', s2.latLng2Id(latLng1.lat, latLng1.lng, 17));
 console.log('s2.latLng2Id-30:', s2.latLng2Id(latLng1.lat, latLng1.lng, 30));
 console.log('s2.latLng2Id-def:', s2.latLng2Id(latLng1.lat, latLng1.lng));
+
+var rect = new s2.S2LatLngRect(latLng1, latLng4);
+console.log('size:',rect.size());
+console.log('geojson:',JSON.stringify(rect.toGeoJSON()));
