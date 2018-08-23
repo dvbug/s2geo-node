@@ -93,3 +93,18 @@ console.log('s2.latLng2Id-def:', s2.latLng2Id(latLng1.lat, latLng1.lng));
 var rect = new s2.S2LatLngRect(latLng1, latLng4);
 console.log('size:',rect.size());
 console.log('geojson:',JSON.stringify(rect.toGeoJSON()));
+console.log('rect.vertex:', rect.getVertex(0).toArray());
+console.log('rect.vertex:', rect.getVertex(1).toArray());
+console.log('rect.vertex:', rect.getVertex(2).toArray());
+console.log('rect.vertex:', rect.getVertex(3).toArray());
+var cell = new s2.S2Cell(cid1);
+console.log('cell.vertex:', new s2.S2LatLng(cell.getVertex(0)).toArray());
+console.log('cell.vertex:', new s2.S2LatLng(cell.getVertex(1)).toArray());
+console.log('cell.vertex:', new s2.S2LatLng(cell.getVertex(2)).toArray());
+console.log('cell.vertex:', new s2.S2LatLng(cell.getVertex(3)).toArray());
+
+console.log('rect.contains(latlng):', rect.contains(latLng1));
+console.log('rect.contains(latlng):', rect.contains(latLng2));
+var rect2 = new s2.S2LatLngRect(latLng1, latLng4);
+console.log('rect.contains(latlngrect):', rect.contains(rect2));
+console.log('rect.contains(latlngrect):', rect.contains(latLngRect));

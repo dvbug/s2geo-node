@@ -136,8 +136,22 @@ void LatLngRect::GetVertex(const FunctionCallbackInfo<Value>& args) {
 void LatLngRect::Contains(const FunctionCallbackInfo<Value>& args) {
     Isolate* isolate = args.GetIsolate();
     LatLngRect* latlngrect = node::ObjectWrap::Unwrap<LatLngRect>(args.Holder());
-    S2LatLng other = node::ObjectWrap::Unwrap<LatLng>(args[0]->ToObject())->get();
-    args.GetReturnValue().Set(Boolean::New(isolate,latlngrect->this_.Contains(other)));
+//    S2LatLng other = node::ObjectWrap::Unwrap<LatLng>(args[0]->ToObject())->get();
+    Local<Object> argobj = args[0]->ToObject();
+    Local<FunctionTemplate> lltemp = Local<FunctionTemplate>::New(isolate,LatLng::constructor);
+    Local<FunctionTemplate> llrtemp = Local<FunctionTemplate>::New(isolate,LatLngRect::constructor);
+    if(lltemp->HasInstance(argobj)) {
+        S2LatLng other = node::ObjectWrap::Unwrap<LatLng>(argobj)->get();
+        args.GetReturnValue().Set(Boolean::New(isolate,latlngrect->this_.Contains(other)));
+    } else if(llrtemp->HasInstance(argobj)) {
+        S2LatLngRect other = node::ObjectWrap::Unwrap<LatLngRect>(argobj)->get();
+        args.GetReturnValue().Set(Boolean::New(isolate,latlngrect->this_.Contains(other)));
+    } else {
+        isolate->ThrowException(Exception::TypeError(
+            String::NewFromUtf8(isolate, "(latlng) or (latlngrect) required")
+        ));
+        return;
+    }
 }
 
 void LatLngRect::IsValid(const FunctionCallbackInfo<Value>& args) {

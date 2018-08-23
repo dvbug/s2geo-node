@@ -51,6 +51,10 @@ bindings, that means (so far)
 
 ---
 
+# Install
+
+```npm install s2geo```
+
 # API
 
 # s2.S2Point(x:number, y:number, z:number)
@@ -204,7 +208,9 @@ Return the k-th vertex of the rectangle (k = 0,1,2,3) in CCW order.
 
 ## latLngRect.getCapBound() -> s2.S2Cap
 
-## latLngRect.contains(ll:latlng) -> boolean
+## latLngRect.contains(ll:s2.S2LatLng) -> boolean
+
+## latLngRect.contains(llr:s2.S2LatLngRect) -> boolean
 
 ## latLngRect.isEmpty() -> boolean
 
