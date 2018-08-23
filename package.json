@@ -1,6 +1,6 @@
 {
   "name": "s2geo",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "main": "index.js",
   "scripts": {
     "configure": "node-gyp configure",
